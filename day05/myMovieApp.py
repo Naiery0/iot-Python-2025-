@@ -24,8 +24,15 @@ def run():
         sel_menu = set_menu()
         if sel_menu == 1:
             # print('영화 입력')
-            movie = set_movie()
-            lst_movie.append(movie)
+            try:
+                movie = set_movie()
+                lst_movie.append(movie)
+                print('영화 입력 성공')
+            except ValueError as e:
+                    print(f'영화 입력 실패. 값을 바르게 입력해주세요.')
+            except Exception as e:
+                    print(f'영화 입력 실패 {e}')
+                
 
         elif sel_menu == 2:
             print('영화 출력')
@@ -55,14 +62,20 @@ def run():
         
 # 영화검색 함수        
 def search_movie(items: list, title: str):
+    search_count = 0 # 검색된 영화 수
     for item in items: # item이 Movie 클래스인지 알 수 없음
         if item.isNameContain(title): # 오타발생 위험!
+            search_count += 1
             print(item)
+            print('----------')
+    
+    print(f'총 데이터 수 : {(search_count)} 개')
 
 def del_movie(items: list, title: str):
     for i, item in enumerate(items):
         if item.isNameExist(title):
             del items[i] # 인덱스로 리스트에 요소하나를 삭제
+            print('삭제되었습니다.')
 
 # 폴더에 파일로 영화리스트 저장
 def save_movie(items: list):
@@ -76,21 +89,25 @@ def save_movie(items: list):
     f.close()
 
 def load_movie(items: list):
-    f = open('movie_db.txt', encoding='utf-8', mode='r')
-    while True:
-        line = f.readline().replace('\n', '')  # 어벤져스:인피니티 워|2018|디즈니|8.6\n
-        if not line: break  # 무한루프 빠져나가는 조건
+    try:
+        f = open('movie_db.txt', encoding='utf-8', mode='r') # 파일이 없을 경우 예외 발생
+        while True:
+            line = f.readline().replace('\n', '')  # 어벤져스:인피니티 워|2018|디즈니|8.6\n
+            if not line: break  # 무한루프 빠져나가는 조건
 
-        lines = line.split('|') # 구분자로 잘라서 네개의 요소의 리스트 생성
-        title = lines[0]
-        year = int(lines[1])
-        company = lines[2]
-        rate = float(lines[3])  # '8.6\n'
+            lines = line.split('|') # 구분자로 잘라서 네개의 요소의 리스트 생성
+            title = lines[0]
+            year = int(lines[1])
+            company = lines[2]
+            rate = float(lines[3])  # '8.6\n'
 
-        movie = Movie(title, year, company, rate)
-        items.append(movie)
+            movie = Movie(title, year, company, rate)
+            items.append(movie)
 
-    f.close()
+        f.close()
+    except FileNotFoundError:
+        f = open('movie_db.txt', encoding='utf-8', mode='w')
+        f.close()
 
 def set_movie():
     title, year, company, rate = input('영화입력[제목|개봉년|제작사|평점 순] > ').split('|') # 입력 중 발생하는 예외
@@ -105,6 +122,9 @@ def set_movie():
 def get_movie(items: list):
     for item in items:
         print(item)  # Movie 객체
+        print('----------') # 각 영화 아이템 별 구분자
+    
+    print(f'총 데이터 수 : {len(items)} 개')
 
 def set_menu():
     str_menu = (f'내영화 앱 v{VERSION}\n'
