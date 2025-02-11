@@ -198,6 +198,10 @@ https://github.com/user-attachments/assets/bca97d38-e7ca-455e-ad57-49dcddf08221
     - 실습
         - 제미나이 챗앱 -> **클래스형태**로 변경 
     
+
+https://github.com/user-attachments/assets/1459b6e1-ae26-4b2f-9f61-2f16270e84e4
+
+
     - 실행파일 만들기
         - `pyinstaller` 모듈 설치
             - pip install pyinstaller
