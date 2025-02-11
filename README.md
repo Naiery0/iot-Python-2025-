@@ -200,11 +200,12 @@ https://github.com/user-attachments/assets/bca97d38-e7ca-455e-ad57-49dcddf08221
     
     - 실행파일 만들기
         - `pyinstaller` 모듈 설치
-        - > pip install pyinstaller
-        - > pyinstaller --onefile 파이썬파일명
-        - 같이 실행되는 터미널을 제거하려면
-        - > pyinstaller --onefile --noconsole 파이썬파일명
-        - 아이콘 등의 리소스를 같은 폴더에 복사 필요
+            - pip install pyinstaller
+        - 실행파일 명령어(터미널에 실행)
+            - pyinstaller --onefile 파이썬파일명
+            - 같이 실행되는 터미널을 제거하려면
+            - pyinstaller --onefile --noconsole 파이썬파일명
+            - 아이콘 등의 리소스를 같은 폴더에 복사 필요
 
 
    
