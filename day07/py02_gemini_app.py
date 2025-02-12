@@ -48,8 +48,9 @@ class window(Tk):
         self.textResult.tag_configure('ai', font=self.myFont, foreground='limegreen')
         self.textResult.tag_configure('error', font=self.boldFont, foreground='red')
 
-        self.buttonSend = Button(self.inputFrame, text='전송', bg='#8f8f8f', fg= 'white', font=self.myFont,
-                            command=self.responseMessage)
+        self.buttonSend = Button(self.inputFrame, text='전송', bg='#8f8f8f', fg= 'white', 
+                                 font=self.myFont,
+                                command=self.responseMessage)
         self.buttonSend.pack(side=RIGHT, padx=20, pady=5)
 
         # 9. 실행 후 바로 입력창에 포커스가 가도록
